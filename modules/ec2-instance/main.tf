@@ -39,7 +39,7 @@ resource "aws_security_group" "allow_ssh" {
       cidr_blocks = [ingress.value]
     }
   }
-  
+
   egress {
     from_port   = 0
     to_port     = 0
@@ -49,3 +49,22 @@ resource "aws_security_group" "allow_ssh" {
 
 }
 
+# resource "aws_ebs_volume" "redhat_volume" {
+#   count = var.create_ebs ? length(aws_instance.redhat_server) : 0
+
+#   availability_zone = values(aws_instance.redhat_server)[count.index].availability_zone
+#   size              = var.size_of_volume
+#   tags = {
+#     Name = "redhat-volume-${count.index}",
+#   }
+# }
+
+
+
+
+# resource "aws_volume_attachment" "redhat_volume_attachment" {
+#   count          = var.instance_count * var.volume_count_per_instance
+#   instance_id    = aws_instance.redhat_server[count.index % var.instance_count].id
+#   volume_id      = aws_ebs_volume.redhat_volume[count.index].id
+#   device_name    = "/dev/sdh"  # Specify the desired device name for attachment
+# }
